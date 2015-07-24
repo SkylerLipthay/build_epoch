@@ -1,0 +1,17 @@
+[package]
+name = "build_epoch"
+version = "0.0.1"
+authors = ["Skyler Lipthay <skyler.lipthay@gmail.com>"]
+description = "Macro for calculating the epoch at compile time"
+readme = "README.md"
+keywords = ["macro", "epoch", "build"]
+license = "MIT"
+repository = "https://github.com/SkylerLipthay/build_epoch"
+
+[lib]
+name = "build_epoch"
+plugin = true
+
+[dependencies]
+lazy_static = "*"
+time = "*"
