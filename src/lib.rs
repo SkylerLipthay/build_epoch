@@ -4,10 +4,13 @@
 extern crate lazy_static;
 extern crate rustc;
 extern crate syntax;
-extern crate time;
+use std::time::{UNIX_EPOCH, SystemTime};
 
 lazy_static! {
-    static ref EPOCH: i64 = time::get_time().sec;
+    static ref EPOCH: u64 = match SystemTime::now().duration_since(UNIX_EPOCH) {
+        Ok(dur) => dur,
+        Err(err) => err.duration(),
+    }.as_secs();
 }
 
 use rustc::plugin::Registry;
