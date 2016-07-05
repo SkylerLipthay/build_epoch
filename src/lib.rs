@@ -3,7 +3,9 @@
 #[macro_use]
 extern crate lazy_static;
 extern crate rustc;
+extern crate rustc_plugin;
 extern crate syntax;
+
 use std::time::{UNIX_EPOCH, SystemTime};
 
 lazy_static! {
@@ -13,11 +15,12 @@ lazy_static! {
     }.as_secs();
 }
 
-use rustc::plugin::Registry;
+use rustc_plugin::Registry;
 use syntax::codemap::Span;
-use syntax::ast::{IntTy, Lit_, LitIntType, Sign, TokenTree};
+use syntax::ast::{LitIntType, LitKind, UintTy};
 use syntax::ext::base::{DummyResult, ExtCtxt, MacEager, MacResult};
 use syntax::ext::build::AstBuilder;
+use syntax::tokenstream::TokenTree;
 
 #[plugin_registrar]
 pub fn plugin_registrar(reg: &mut Registry) {
@@ -30,6 +33,6 @@ fn build_epoch<'a>(cx: &'a mut ExtCtxt, span: Span, tts: &[TokenTree]) -> Box<Ma
         return DummyResult::any(span);
     }
 
-    let lit = Lit_::LitInt(*EPOCH as u64, LitIntType::SignedIntLit(IntTy::TyI64, Sign::Plus));
+    let lit = LitKind::Int(*EPOCH as u64, LitIntType::Unsigned(UintTy::U64));
     MacEager::expr(cx.expr_lit(span, lit))
 }
