@@ -13,5 +13,4 @@ name = "build_epoch"
 plugin = true
 
 [dependencies]
-lazy_static = "*"
-time = "*"
+lazy_static = "^0.2.1"
