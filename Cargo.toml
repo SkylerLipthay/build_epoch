@@ -1,6 +1,6 @@
 [package]
 name = "build_epoch"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Skyler Lipthay <skyler.lipthay@gmail.com>"]
 description = "Macro for calculating the epoch at compile time"
 readme = "README.md"
@@ -13,4 +13,4 @@ name = "build_epoch"
 plugin = true
 
 [dependencies]
-lazy_static = "^0.2.1"
+lazy_static = "0.2.1"
